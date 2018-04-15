@@ -11,29 +11,37 @@ import UIKit
 class ToDoListViewController: UITableViewController {
 
     var itemArray = [Item]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
-    let defaults = UserDefaults.standard
+    //let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let newItem = Item()
-        newItem.title = "Log In"
-        itemArray.append(newItem)
-        
-        let newItem2 = Item()
-        newItem2.title = "Register"
-        itemArray.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "Tech for PeeZee"
-        itemArray.append(newItem3)
         
         
-        if let items = defaults.array(forKey: "ToDoListArray") as? [Item] {
-            itemArray = items
-        }
+        print(dataFilePath)
+        
+//        let newItem = Item()          using loadItems() func
+//        newItem.title = "Log In"
+//        itemArray.append(newItem)
+//        
+//        let newItem2 = Item()
+//        newItem2.title = "Register"
+//        itemArray.append(newItem2)
+//        
+//        let newItem3 = Item()
+//        newItem3.title = "Tech for PeeZee"
+//        itemArray.append(newItem3)
+        
+        //code that loads up Items.plist
+        loadItems()
+        
+        
+//        if let items = defaults.array(forKey: "ToDoListArray") as? [Item] {
+//            itemArray = items
+//        }
     }
 
    //MARK - Tableview Data Methods
@@ -73,6 +81,8 @@ class ToDoListViewController: UITableViewController {
         //this does the same as the if else statement following this line that is commented out
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
+        saveItems()
+        
 //        if itemArray[indexPath.row].done == false {
 //            itemArray[indexPath.row].done = true
 //        } else {
@@ -87,7 +97,7 @@ class ToDoListViewController: UITableViewController {
 //            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
 //        }
         //removes the checkmark
-        tableView.reloadData()
+        //tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -111,11 +121,25 @@ class ToDoListViewController: UITableViewController {
             //append a new row to the table
             self.itemArray.append(newItem)
             
-            //save updatedItem array to our user defaults
-            self.defaults.set(self.itemArray, forKey: "ToDoListArray")
+            // func that was created to be reused section 19 part 246 12:06
             
-            //make new item appear in table
-            self.tableView.reloadData()
+            self.saveItems()
+            
+            //save updatedItem array to our user defaults --- consider something other than user defaults this will crash the app-
+            //stop using user defaults - section 19 part 244
+            //self.defaults.set(self.itemArray, forKey: "ToDoListArray")
+            
+            //encoder-- exists inside of func savedItems
+//            let encoder = PropertyListEncoder()
+//
+//            do {
+//                let data = try encoder.encode(self.itemArray)
+//                try data.write(to: self.dataFilePath!)
+//            } catch {
+//                print("Error encoding item array, \(error)")
+//            }
+//            //make new item appear in table
+//            self.tableView.reloadData()
         }
         
         //created as a local variable inside of this closure
@@ -127,6 +151,38 @@ class ToDoListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    //MARK -- Model Manipulation methods
+    //MARK -- SAVE DATA METHOD
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error encoding item array, \(error)")
+        }
+        //make new item appear in table
+        self.tableView.reloadData()
+    }
+    
+    //MARK -- Load Items
+    
+    func loadItems() {
+        // can throw error, mark with tray? turning result into an optional you will
+        //need optional binding to safely unwrap data dataFilePath!
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            // need decoder
+            let decoder = PropertyListDecoder()
+            do {
+                try itemArray = decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array, \(error)")
+            }
+        }
     }
     
 }
