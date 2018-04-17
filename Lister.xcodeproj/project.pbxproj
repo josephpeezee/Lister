@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A14D9C62B0B94FBD50F7B0F2 /* Pods_Lister.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E57652657E4EBA4D997824 /* Pods_Lister.framework */; };
 		FD3827512083C08800B9EFFB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD38274F2083C08800B9EFFB /* DataModel.xcdatamodeld */; };
 		FD5B501F2080064800A05B96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5B501E2080064800A05B96 /* AppDelegate.swift */; };
 		FD5B50212080064800A05B96 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5B50202080064800A05B96 /* ToDoListViewController.swift */; };
@@ -17,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3ADF4753ED70348656B93575 /* Pods-Lister.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lister.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lister/Pods-Lister.release.xcconfig"; sourceTree = "<group>"; };
+		EF395C1E97F0C58652A6BED3 /* Pods-Lister.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lister.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lister/Pods-Lister.debug.xcconfig"; sourceTree = "<group>"; };
+		F9E57652657E4EBA4D997824 /* Pods_Lister.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lister.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD3827502083C08800B9EFFB /* Data Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Data Model.xcdatamodel"; sourceTree = "<group>"; };
 		FD5B501B2080064800A05B96 /* Lister.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lister.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5B501E2080064800A05B96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14D9C62B0B94FBD50F7B0F2 /* Pods_Lister.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270EEC2EF625FCE5DBFA7B2C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9E57652657E4EBA4D997824 /* Pods_Lister.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C3627530C42BC72C84EF6EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF395C1E97F0C58652A6BED3 /* Pods-Lister.debug.xcconfig */,
+				3ADF4753ED70348656B93575 /* Pods-Lister.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FD5B50122080064800A05B96 = {
 			isa = PBXGroup;
 			children = (
 				FD5B501D2080064800A05B96 /* Lister */,
 				FD5B501C2080064800A05B96 /* Products */,
+				3C3627530C42BC72C84EF6EE /* Pods */,
+				270EEC2EF625FCE5DBFA7B2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,9 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD5B502D2080064900A05B96 /* Build configuration list for PBXNativeTarget "Lister" */;
 			buildPhases = (
+				6AA48DED704036D9F85CBB7D /* [CP] Check Pods Manifest.lock */,
 				FD5B50172080064800A05B96 /* Sources */,
 				FD5B50182080064800A05B96 /* Frameworks */,
 				FD5B50192080064800A05B96 /* Resources */,
+				C95C100946859EC6CECA5C2B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -167,6 +193,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6AA48DED704036D9F85CBB7D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lister-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C95C100946859EC6CECA5C2B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Lister/Pods-Lister-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lister/Pods-Lister-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD5B50172080064800A05B96 /* Sources */ = {
@@ -318,15 +385,14 @@
 		};
 		FD5B502E2080064900A05B96 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF395C1E97F0C58652A6BED3 /* Pods-Lister.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XS66KM8Y9H;
 				INFOPLIST_FILE = Lister/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.peezee.Lister;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -336,15 +402,14 @@
 		};
 		FD5B502F2080064900A05B96 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ADF4753ED70348656B93575 /* Pods-Lister.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XS66KM8Y9H;
 				INFOPLIST_FILE = Lister/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.peezee.Lister;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

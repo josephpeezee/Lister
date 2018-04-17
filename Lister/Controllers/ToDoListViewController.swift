@@ -16,13 +16,13 @@ import CoreData
 class ToDoListViewController: UITableViewController {
 
     var itemArray = [Item]()
-    //let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     var selectedCategory : Category? {
         didSet {
             loadItems()
         }
     }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -55,8 +55,6 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: - Tableview Delegate Messages
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        //for checkmark
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         
@@ -82,12 +80,7 @@ class ToDoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            //down cast as app delegate-- taps into UIApplication class getting dshared singleton object (.shared) cooresponds to the current app as an object- tapping into its delegate with the data type of an optional UIDelegate and casting (as!)it into AppDelegate both inherit from UIAPPLICATION delegate- gives access to AppDelegate as an object and taps into property of persistentcontainer and can grab as its propertyviewContext
-            
-            //becomes a global variable so that it can be used elsewhere, make sure to use "self" when calling within a closure
-            //section 250 part 19- copied to global
-            //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            
+                      
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             
