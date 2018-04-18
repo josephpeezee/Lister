@@ -15,6 +15,7 @@
 		FD5B50242080064800A05B96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD5B50222080064800A05B96 /* Main.storyboard */; };
 		FD5B50262080064900A05B96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD5B50252080064900A05B96 /* Assets.xcassets */; };
 		FD5B50292080064900A05B96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD5B50272080064900A05B96 /* LaunchScreen.storyboard */; };
+		FDCFFAF42086FE1A0038CB79 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCFFAF32086FE1A0038CB79 /* SwipeViewController.swift */; };
 		FDF098A82085278C0021D4ED /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF098A72085278C0021D4ED /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		FD5B50252080064900A05B96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD5B50282080064900A05B96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD5B502A2080064900A05B96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDCFFAF32086FE1A0038CB79 /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		FDF098A72085278C0021D4ED /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 			children = (
 				FDF098A72085278C0021D4ED /* CategoryViewController.swift */,
 				FD5B50202080064800A05B96 /* ToDoListViewController.swift */,
+				FDCFFAF32086FE1A0038CB79 /* SwipeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				FD5B50212080064800A05B96 /* ToDoListViewController.swift in Sources */,
 				FD5B501F2080064800A05B96 /* AppDelegate.swift in Sources */,
 				FD065F222086BB8400E8D2D7 /* Category.swift in Sources */,
+				FDCFFAF42086FE1A0038CB79 /* SwipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +402,10 @@
 				DEVELOPMENT_TEAM = XS66KM8Y9H;
 				INFOPLIST_FILE = Lister/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.peezee.Lister;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -415,7 +422,10 @@
 				DEVELOPMENT_TEAM = XS66KM8Y9H;
 				INFOPLIST_FILE = Lister/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.peezee.Lister;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
