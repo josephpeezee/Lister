@@ -21,7 +21,7 @@ class CategoryViewController: SwipeViewController {
         
         loadCategories()
         
-        tableView.rowHeight = 80.0
+        
         
         //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
