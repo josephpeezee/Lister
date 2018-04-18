@@ -50,6 +50,7 @@ class ToDoListViewController: UITableViewController {
             
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
+            
         } else {
             cell.textLabel?.text = "No iItems Added"
         }
@@ -61,6 +62,17 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: - Tableview Delegate Messages
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    item.done = !item.done
+                }
+            } catch {
+                print("Error saving done status, \(error)")
+            }
+        }
+        tableView.reloadData()
 //        todoItems[indexPath.row].done = !todoItems[indexPath.row].done
         
         
@@ -69,7 +81,7 @@ class ToDoListViewController: UITableViewController {
 //        //if it follows todoItems.remove(at: indexPath.row)
 //        todoItems.remove(at: indexPath.row)
         
-        saveItems()
+//        saveItems()
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
