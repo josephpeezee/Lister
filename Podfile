@@ -7,4 +7,5 @@ target 'Lister' do
 
   # Pods for Lister
 pod 'RealmSwift'
+pod 'SwipeCellKit'
 end
