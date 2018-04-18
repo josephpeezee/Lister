@@ -12,9 +12,9 @@ import RealmSwift
 class CategoryViewController: UITableViewController {
     let realm = try! Realm()
     
-    var categories = [Category]()
+    var categories: Results<Category>? // optional
     
-    let categoryContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //let categoryContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
     override func viewDidLoad() {
@@ -27,14 +27,14 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - TableView Datasource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1 //nil coalescing operator
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        cell.textLabel?.text = categories[indexPath.row].name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added Yet"
         return cell
     }
     
@@ -48,7 +48,7 @@ class CategoryViewController: UITableViewController {
         let destinationVC = segue.destination as!ToDoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
@@ -67,16 +67,11 @@ class CategoryViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    func loadCategories(/*with request: NSFetchRequest<Category> = Category.fetchRequest()*/) {
+    func loadCategories() {
         
-//        let request : NSFetchRequest<Category> = Category.fetchRequest()
-//        do {
-//            categories = try categoryContext.fetch(request)
-//        } catch {
-//            print("error fetching data from context \(error)")
-//        }
-//        tableView.reloadData() /// UGH!! GAVE ME A HEADACHE- need this to load the search info and then reload the items when x clicked
-//        
+        categories = realm.objects(Category.self)
+    
+        tableView.reloadData()
     }
     
     //MARK: - Add new Categories
@@ -93,7 +88,7 @@ class CategoryViewController: UITableViewController {
             let newCategory = Category()
             newCategory.name = textField.text!
             
-            self.categories.append(newCategory)
+            //self.categories.append(newCategory)   --- will aoutoupdate because of REALM is an autoupdating data type
             
             self.save(category: newCategory)
            
