@@ -119,28 +119,7 @@ class ToDoListViewController: UITableViewController {
         
     }
     
-    //MARK: -- Model Manipulation methods
-    //MARK: -- SAVE DATA METHOD
-    //Creating data in database Crud
-    
-    func saveItems() {
-        //no longer using encoder, can remove
-        //let encoder = PropertyListEncoder()
-        
-//        do {
-//            try context.save()
-////            no longer needed, from using plist to store date
-////            let data = try encoder.encode(todoItems)
-////            try data.write(to: dataFilePath!)
-//        } catch {
-//            print("error saving context \(error)")
-//            //no longer need this either, coresponds to plist error
-////            print("Error encoding item array, \(error)")
-//        }
-//        //make new item appear in table
-//        self.tableView.reloadData()
-    }
-    
+ 
     //MARK: -- Load Items
     // Reading data in DB cRud
     
@@ -149,11 +128,8 @@ class ToDoListViewController: UITableViewController {
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         
         tableView.reloadData() /// UGH!! GAVE ME A HEADACHE- need this to load the search info and then reload the items when x clicked
-
     }
     
-    
-
 }
 
 

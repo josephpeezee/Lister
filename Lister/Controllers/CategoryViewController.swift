@@ -13,16 +13,13 @@ class CategoryViewController: UITableViewController {
     let realm = try! Realm()
     
     var categories: Results<Category>? // optional
-    
-    //let categoryContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadCategories()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     //MARK: - TableView Datasource Methods
@@ -59,7 +56,6 @@ class CategoryViewController: UITableViewController {
             try realm.write {
                 realm.add(category)
             }
-            
         } catch {
             print("error saving context \(error)")
         }
@@ -87,8 +83,6 @@ class CategoryViewController: UITableViewController {
             
             let newCategory = Category()
             newCategory.name = textField.text!
-            
-            //self.categories.append(newCategory)   --- will aoutoupdate because of REALM is an autoupdating data type
             
             self.save(category: newCategory)
            
