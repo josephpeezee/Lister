@@ -137,8 +137,7 @@ class ToDoListViewController: UITableViewController {
     
     //MARK: -- Load Items
     // Reading data in DB cRud
-    // when we call, can call externally or internally with "with" external, "request" internal and provides
-    //a default when called without giving any parameters := Item.fetchRequest()
+    
     func loadItems() {
         
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
