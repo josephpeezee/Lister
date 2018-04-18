@@ -96,6 +96,7 @@ class ToDoListViewController: UITableViewController {
                     try self.realm.write {
                         let newItem = Item()
                         newItem.title = textField.text!
+                        newItem.dateCreated = Date()
                         currentCategory.items.append(newItem)
                     }
                 } catch {
@@ -157,53 +158,30 @@ class ToDoListViewController: UITableViewController {
 
 
 //MARK: - Search bar methods
-//extension ToDoListViewController: UISearchBarDelegate {
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        let request : NSFetchRequest<Item> = Item.fetchRequest()
-//        //print(searchBar.text!)
-//        // NSPredicate is a query language that is similar to natural language including modifiers and conditionals %@
-//        //for example-- CONTAINS is a string comparison operator
-//        //let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-//
-//        //print(searchBar.text!)
-//
-//        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-//
-//        //request.predicate = predicate //--becomes line above
-//
-//
-//        //let sortDescriptor = NSSortDescriptor(key: "title", ascending: true) // becomes line below
-//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-//
-//        //request.sortDescriptors = [sortDescriptor] // sortDescriptors becomes an array of sortDescriptors,
-//                                                    // add square brackets around NSSortDescriptors in line above
-//
-////        do {
-////            itemArray = try context.fetch(request)
-////        } catch {
-////            print("error fetching data from context \(error)")
-////        }
-//        loadItems(with: request, predicate: predicate)
-//
-//        //tableView.reloadData()
-//
-//        }
-//
-//
-//    //new delegate method related to search bar to return original data when searchBar is crossed with x button
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//        if searchBar.text?.count == 0 {
-//            loadItems()
-//
-//            DispatchQueue.main.async {
-//                // dumps keyboard and cursor- this can freeze the app because background tasks may not be
-//                //complete move to async method to fix
-//                searchBar.resignFirstResponder()
-//            }
-//
-//        }
-//
-//    }
-//}
+extension ToDoListViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        //todoItems = todoItems?.filter("title CONTAINS[cd] @%", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
+        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: false)
+        
+        tableView.reloadData()
+        }
+
+
+    //new delegate method related to search bar to return original data when searchBar is crossed with x button
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        if searchBar.text?.count == 0 {
+            loadItems()
+
+            DispatchQueue.main.async {
+                // dumps keyboard and cursor- this can freeze the app because background tasks may not be
+                //complete move to async method to fix
+                searchBar.resignFirstResponder()
+            }
+
+        }
+
+    }
+}
