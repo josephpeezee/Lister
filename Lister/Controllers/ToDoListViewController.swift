@@ -10,6 +10,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 
 
@@ -22,6 +23,8 @@ class ToDoListViewController: SwipeViewController {
     var selectedCategory : Category? {
         didSet {
             loadItems()
+            
+            tableView.separatorStyle = .none
         }
     }
     
@@ -50,7 +53,15 @@ class ToDoListViewController: SwipeViewController {
         if let item = todoItems?[indexPath.row] {
             
             cell.textLabel?.text = item.title
+            
+            if let color = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
+                cell.backgroundColor = color
+            }
             cell.accessoryType = item.done ? .checkmark : .none
+            
+            //print("version 1: \(CGFloat(indexPath.row / todoItems!.count))")
+            
+            print("version 2: \(CGFloat(indexPath.row) / CGFloat(todoItems!.count))")
             
         } else {
             cell.textLabel?.text = "No iItems Added"
