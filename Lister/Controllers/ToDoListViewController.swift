@@ -67,21 +67,14 @@ class ToDoListViewController: UITableViewController {
             do {
                 try realm.write {
                     item.done = !item.done
+                    //realm.delete(item)
                 }
             } catch {
                 print("Error saving done status, \(error)")
             }
         }
         tableView.reloadData()
-//        todoItems[indexPath.row].done = !todoItems[indexPath.row].done
-        
-        
-        //for deletion--- cruD
-//        context.delete(todoItems[indexPath.row]) //this alone will crash app becuase the item no longer exists
-//        //if it follows todoItems.remove(at: indexPath.row)
-//        todoItems.remove(at: indexPath.row)
-        
-//        saveItems()
+
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
